@@ -6,21 +6,27 @@ export class KeypressSubmit extends Component {
     }
 
     render() {
-        this.addListener(this.props.inputClass,this.props.submitClass,this.props.keyCode);
-        return(<div></div>);
-    }
-
-    addListener(inputClass, submitButtonClass, keyCode) {
+		let inputClass = this.props.inputClass;
+		let submitClass = this.props.submitClass;
 		let inputs = document.getElementsByClassName(inputClass);
-		let buttons = document.getElementsByClassName(submitButtonClass);
+		let buttons = document.getElementsByClassName(submitClass);
+		
+		if(inputs.length==0) {
+			console.warn('Warning: Keypress submit could not find any inputs with class name: '+inputClass);
+		}
+		if(buttons.length==0) {
+			console.warn('Warning: Keypress submit could not find any buttons with class name: '+submitClass);
+		}
+
 		for (const input of inputs) {
 			input.addEventListener('keyup', (event) => {
-				if(event.keyCode == keyCode) {
+				if(event.keyCode == this.props.keyCode) {
 					for(const button of buttons) {
 						button.click();
 					}
 				}
 			});
 		}
+        return(<div></div>);
     }
 }
