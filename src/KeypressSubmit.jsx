@@ -1,33 +1,26 @@
 import { Component, createElement } from "react";
 
-import { BadgeSample } from "./components/BadgeSample";
-
 export class KeypressSubmit extends Component {
     constructor(props) {
         super(props);
-
-        this.onClickHandler = this.onClick.bind(this);
     }
 
     render() {
-        return (
-            /*<BadgeSample
-                type={this.props.keypresssubmitType}
-                bootstrapStyle={this.props.bootstrapStyle}
-                className={this.props.class}
-                clickable={!!this.props.onClickAction}
-                defaultValue={this.props.keypresssubmitValue ? this.props.keypresssubmitValue : ""}
-                onClickAction={this.onClickHandler}
-                style={this.props.style}
-                value={this.props.valueAttribute ? this.props.valueAttribute.displayValue : ""}
-            />*/
-            undefined
-        );
+        this.addListener(this.props.inputClass,this.props.submitClass,this.props.keyCode);
+        return(<div></div>);
     }
 
-    onClick() {
-        if (this.props.onClickAction && this.props.onClickAction.canExecute) {
-            this.props.onClickAction.execute();
-        }
+    addListener(inputClass, submitButtonClass, keyCode) {
+		let inputs = document.getElementsByClassName(inputClass);
+		let buttons = document.getElementsByClassName(submitButtonClass);
+		for (const input of inputs) {
+			input.addEventListener('keyup', (event) => {
+				if(event.keyCode == keyCode) {
+					for(const button of buttons) {
+						button.click();
+					}
+				}
+			});
+		}
     }
 }

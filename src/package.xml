@@ -3,7 +3,6 @@
     <clientModule name="KeypressSubmit" version="1.0.0" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
             <widgetFile path="KeypressSubmit.xml"/>
-            <widgetFile path="KeypressSubmit_Context.xml"/>
         </widgetFiles>
         <files>
             <file path="ncsu/keypresssubmit"/>

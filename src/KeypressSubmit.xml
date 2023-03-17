@@ -18,7 +18,7 @@
                 <caption>Submit class name</caption>
                 <description>The class name of the submit button. Only one element on the page should have this class.</description>
             </property>
-            <property key="keyCode" type="integer" required="true">
+            <property key="keyCode" type="integer" defaultValue="13" required="true">
                 <caption>Key code</caption>
                 <description>The key ID of the keypress to listen for. Default is 13 for the enter key.</description>
             </property>
