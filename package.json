@@ -1,0 +1,33 @@
+{
+  "name": "keypresssubmit",
+  "widgetName": "KeypressSubmit",
+  "version": "1.0.0",
+  "description": "Enables forms to be submitted with a keypress.",
+  "copyright": "NCSU 2023",
+  "author": "Kathryn Rees",
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "projectPath": "./tests/testProject",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "ncsu",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^9.18.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6"
+  }
+}
