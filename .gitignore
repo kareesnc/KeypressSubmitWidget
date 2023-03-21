@@ -18,3 +18,7 @@ mendixProject
 **/screenshot-results
 **/tests/testProject
 **/artifacts
+
+demo/deployment
+demo/.classpath
+demo/.project

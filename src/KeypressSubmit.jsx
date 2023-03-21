@@ -3,30 +3,43 @@ import { Component, createElement } from "react";
 export class KeypressSubmit extends Component {
     constructor(props) {
         super(props);
+
+        // interval config: 2 attempts per second, for 10s
+        this.intervalHandle = undefined;
+        this.intervalDelay = 500; // in ms
+        this.maxAttempts = 20;
+        this.currentAttempts = 0;
     }
 
     render() {
-		let inputClass = this.props.inputClass;
-		let submitClass = this.props.submitClass;
-		let inputs = document.getElementsByClassName(inputClass);
-		let buttons = document.getElementsByClassName(submitClass);
-		
-		if(inputs.length==0) {
-			console.warn('Warning: Keypress submit could not find any inputs with class name: '+inputClass);
-		}
-		if(buttons.length==0) {
-			console.warn('Warning: Keypress submit could not find any buttons with class name: '+submitClass);
-		}
-
-		for (const input of inputs) {
-			input.addEventListener('keyup', (event) => {
-				if(event.keyCode == this.props.keyCode) {
-					for(const button of buttons) {
-						button.click();
-					}
-				}
-			});
-		}
+        let self = this;
+        this.intervalHandle = setInterval(function() {
+            self.addListeners();
+        }, this.intervalDelay);
         return(<div></div>);
+    }
+
+    addListeners() {
+        if(this.maxAttempts>=100) {
+            clearInterval(this.intervalHandle);
+            console.warn('Could not find required elements for keypress submit. ('+this.props.inputClass+','+this.props.submitClass+')');
+            return;
+        }
+        this.currentAttempts++;
+
+        let inputs = document.querySelectorAll('.'+this.props.inputClass+' input,'
+                                              +'.'+this.props.inputClass+' select');
+        let button = document.querySelector('.'+this.props.submitClass);
+
+        if(inputs.length>0 && button) {
+            clearInterval(this.intervalHandle);
+            for (const input of inputs) {
+                input.addEventListener('keyup', (event) => {
+                    if(event.keyCode == this.props.keyCode) {
+                        button.click();
+                    }
+                });
+            }
+        }
     }
 }
